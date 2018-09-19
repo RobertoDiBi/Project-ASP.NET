@@ -1,0 +1,54 @@
+﻿@model HouseProject.ViewModels.TransactionsViewModel
+@{
+    ViewBag.Title = "Transactions";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<h2 class="jumbotron">My transactions</h2>
+
+<div class="container">
+    <div class="row">
+        <div class="col-sm-3">
+            <ul class="list-group">
+                <li class="list-group-item">
+                    @Html.ActionLink("Profile", "UserProfile", "User")
+                </li>
+                <li class="list-group-item">
+                    @Html.ActionLink("View transactions", "Transactions", "User")
+                </li>
+                <li class="list-group-item">
+                    @Html.ActionLink("Hosting requests", "HostingRequests", "User")
+                </li>
+                <li class="list-group-item">
+                    @Html.ActionLink("Change password", "ChangePassword", "Manage")
+                </li>
+            </ul>
+        </div>
+        <div class="col-md">
+            @if (!Model.BookingRecords.Any())
+            {
+                <p>You don't have any transactions yet.</p>
+                @Html.ActionLink("Want to rent a home?", "Index", "House")
+            }
+            else
+            {
+                foreach (var record in Model.BookingRecords)
+                {
+                    <table class="table table-bordered table-hover">
+                        <tr>
+                            <td>
+                                You have booked @record.Home.Title
+                                from @record.StartDate.ToShortDateString()
+                                to @record.EndDate.ToShortDateString().<br />
+                                Total: @string.Format("{0:C}", record.TotalPrice)<br />
+                                @Html.ActionLink("View home", "HouseDetails", "House", new { id = record.HomeID }, null)
+                            </td>
+                        </tr>
+                    </table>
+                }
+            }
+        </div>
+    </div>
+</div>
+
+

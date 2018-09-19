@@ -1,0 +1,45 @@
+﻿@model HouseProject.ViewModels.ManageRequestsViewModel
+@{
+    ViewBag.Title = "ManageRequests";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<h2 class="jumbotron">Pending requests</h2>
+@if (!Model.HostRequests.Any())
+{
+    <p>There are no pending requests. Looks like you actually did your job.</p>
+}
+else
+{
+    <table class="table table-bordered table-hover">
+        @foreach (var request in Model.HostRequests)
+        {
+            <tr>
+                <td class="col-md">
+                    <b>@request.Home.Title</b><br />
+                    @request.Home.Address, @request.Home.City, @request.Home.Province, @request.Home.PostalCode<br />
+                    @request.Home.HomeType.Name | @request.Home.NumOfRooms Rooms | @request.Home.MaxOccupants max occupants | @string.Format("{0:C}", request.Home.PricePerNight) / Night<br />
+                    Amenities:
+                    @if (!request.Home.Amenities.Any())
+                    {
+                        <span>None.</span>
+                    }
+                    else
+                    {
+                        foreach (var amenity in request.Home.Amenities)
+                        {
+                            <span>@amenity.Name | </span>
+                        }
+                    }
+                    <br />
+                    Time of request: @request.RequestDate
+                </td>
+                <td class="col-sm-3">
+                    @Html.ActionLink("Approve", "ApproveRequest", "User", new { id = request.ID }, new { @class = "btn btn-success" })<br /><br />
+                    @Html.ActionLink("Decline", "DeclineRequest", "User", new { id = request.ID }, new { @class = "btn btn-danger" })
+                </td>
+            </tr>
+        }
+    </table>
+}
+

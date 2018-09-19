@@ -1,0 +1,85 @@
+﻿@model HouseProject.ViewModels.HostRequestViewModel
+@{
+    /**/
+
+    ViewBag.Title = "HostingRequestForm";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<h2 class="jumbotron">Hosting Request Form</h2>
+
+@using (Html.BeginForm("SubmitRequest", "House"))
+{
+    @Html.ValidationSummary(true, "Please fix the following errors.")
+    <div class="form-group">
+        @Html.LabelFor(m => m.Home.Title)
+        @Html.TextBoxFor(m => m.Home.Title, new { @class = "form-control" })
+        @Html.ValidationMessageFor(m => m.Home.Title)
+    </div>
+    <div class="form-group">
+        @Html.LabelFor(m => m.Home.Description)
+        @Html.TextAreaFor(m => m.Home.Description, new { @class = "form-control" })
+        @Html.ValidationMessageFor(m => m.Home.Description)
+    </div>
+    <div class="form-group">
+        @Html.LabelFor(m => m.Home.HomeTypeID)
+        @Html.DropDownListFor(m => m.Home.HomeTypeID, new SelectList(Model.HomeTypes, "ID", "Name"), "Please select a home type", new { @class = "form-control" })
+        @Html.ValidationMessageFor(m => m.Home.HomeTypeID)
+    </div>
+    <div class="form-group">
+        @Html.LabelFor(m => m.Home.NumOfRooms)
+        @Html.TextBoxFor(m => m.Home.NumOfRooms, new { @class = "form-control" })
+        @Html.ValidationMessageFor(m => m.Home.NumOfRooms)
+    </div>
+    <div class="form-group">
+        @Html.LabelFor(m => m.Home.Address)
+        @Html.TextBoxFor(m => m.Home.Address, new { @class = "form-control" })
+        @Html.ValidationMessageFor(m => m.Home.Address)
+    </div>
+    <div class="form-group">
+        @Html.LabelFor(m => m.Home.City)
+        @Html.TextBoxFor(m => m.Home.City, new { @class = "form-control" })
+        @Html.ValidationMessageFor(m => m.Home.City)
+    </div>
+    <div class="form-group">
+        @Html.LabelFor(m => m.Home.Province)
+        @Html.DropDownListFor(m => m.Home.Province, new SelectList(ViewBag.Province, "Value", "Text"), "Please select a province", new { @class = "form-control" })
+        @Html.ValidationMessageFor(m => m.Home.Province)
+    </div>
+    <div class="form-group">
+        @Html.LabelFor(m => m.Home.PostalCode)
+        @Html.TextBoxFor(m => m.Home.PostalCode, new { @class = "form-control" })
+        @Html.ValidationMessageFor(m => m.Home.PostalCode)
+    </div>
+    <div class="form-group">
+        @Html.LabelFor(m => m.Home.MaxOccupants)
+        @Html.TextBoxFor(m => m.Home.MaxOccupants, new { @class = "form-control" })
+        @Html.ValidationMessageFor(m => m.Home.MaxOccupants)
+    </div>
+    <div class="form-group">
+        @Html.LabelFor(m => m.Home.PricePerNight)
+        @Html.TextBoxFor(m => m.Home.PricePerNight, new { @class = "form-control" })
+        @Html.ValidationMessageFor(m => m.Home.PricePerNight)
+    </div>
+    <span>Available Amenities</span>
+    <div class="form-group row">
+        @for (int i = 0; i < Model.Amenities.Count(); i++)
+        {
+            <div class="checkbox col-lg-1 col-md-1">
+                <label>
+                    @Html.HiddenFor(m => m.Amenities[i].ID)
+                    @Html.CheckBoxFor(m => m.Amenities[i].Checked)
+                    @Html.DisplayFor(m => m.Amenities[i].Name)
+                    @Html.HiddenFor(m => m.Amenities[i].Name)
+                </label>
+            </div>
+        }
+    </div>
+    <button type="submit" class="btn btn-primary">Submit Request</button>
+}
+
+@section scripts
+{
+    @Scripts.Render("~/bundles/jqueryval")
+}
+

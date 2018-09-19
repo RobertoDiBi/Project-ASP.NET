@@ -1,0 +1,196 @@
+﻿@model HouseProject.ViewModels.HouseViewModel
+@{
+    /**/
+
+    /**/
+
+    ViewBag.Title = "Index";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+@if (!Model.Homes.Any())
+{
+    <section class="clean-block clean-catalog dark">
+        <div class="block-heading" id="househeader">
+            <h1 class="" style="color:white;">Explore our Homes</h1>
+            <h4 style="color:white;">Book unique homes all over Canada</h4>
+            <br />
+            <br />
+        </div>
+        <div class="row">
+            <div class="container">
+                @using (Html.BeginForm("Index", "House", FormMethod.Get))
+                {
+                    <div class="row">
+                        <div class="col-md-12">
+
+                            <div class="input-group" id="adv-search">
+                                @Html.TextBox("SearchString", null, new { placeholder = "Search by city...", @class = "form-control" })
+                                <!--<a class="btn btn-primary dropdown-toggle" data-toggle="collapse" data-target="#advance"></a>-->
+                                <div class="input-group-btn">
+                                    <button class="btn btn-outline-primary" type="submit"><i class="fas fa-search"></i></button>
+                                    <div class="btn-group" role="group">
+                                        <div class="input-group-btn search-panel">
+                                            <button type="button" class="btn btn-outline-primary" data-toggle="dropdown">
+                                                <span id="search_concept">Sort  </span><i class="fas fa-sort"></i>
+                                            </button>
+                                            <div class="dropdown-menu" role="menu">
+                                                @Html.ActionLink("Title", "Index", "House", new { sort = ViewBag.SortByTitle, SearchString = ViewBag.search }, new { @class = "dropdown-item" })
+                                                @Html.ActionLink("Province", "Index", "House", new { sort = ViewBag.SortByProvince, SearchString = ViewBag.search }, new { @class = "dropdown-item" })
+                                                @Html.ActionLink("Lowest Price", "Index", "House", new { sort = ViewBag.SortByPriceLow, SearchString = ViewBag.search }, new { @class = "dropdown-item" })
+                                                @Html.ActionLink("Highest Price", "Index", "House", new { sort = ViewBag.SortByPriceHigh, SearchString = ViewBag.search }, new { @class = "dropdown-item" })
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+
+                        </div>
+                    </div>
+                    <!--<div class="row">
+            <div class="col-lg-12">
+                <div id="advance" class="collapse" style="background-color:white;">
+                    <div class="form-group row">
+                        for (int i = 0; i < Model.Amenities.Count(); i++)
+                        {
+                            <div class="checkbox col-lg-4 col-md-4">
+                                <label>
+                                    Html.HiddenFor(m => m.Amenities[i].ID)
+                                    Html.CheckBoxFor(m => m.Amenities[i].Checked)
+                                    Html.DisplayFor(m => m.Amenities[i].Name)
+                                    Html.HiddenFor(m => m.Amenities[i].Name)
+                                </label>
+                            </div>
+                        }
+                    </div>
+                </div>
+            </div>
+        </div>-->
+                }
+            </div>
+        </div>
+        <br />
+        <div class="row">
+            <div class="col-lg-12 col-md-12">
+                <div class="content">
+                    <div class="container">
+                        <h4>
+                            No corresponding houses were found for your criteria
+                        </h4>
+                    </div>
+                    
+                </div>
+            </div>
+        </div>
+    </section>
+
+}
+else
+{
+    <section class="clean-block clean-catalog dark">
+        <div class="block-heading" id="househeader">
+            <h1 class="" style="color:white;">Explore our Homes</h1>
+            <h4 style="color:white;">Book unique homes all over Canada</h4>
+            <br />
+            <br />
+        </div>
+        <div class="row">
+            <div class="container">
+                @using (Html.BeginForm("Index", "House", FormMethod.Get))
+                {
+                    <div class="row">
+                        <div class="col-md-12">
+
+                            <div class="input-group" id="adv-search">
+                                @Html.TextBox("SearchString", null, new { placeholder = "Search by city...", @class = "form-control" })
+                                <!--<a class="btn btn-primary dropdown-toggle" data-toggle="collapse" data-target="#advance"></a>-->
+                                <div class="input-group-btn">
+                                    <button class="btn btn-outline-primary" type="submit"><i class="fas fa-search"></i></button>
+                                    <div class="btn-group" role="group">
+                                        <div class="input-group-btn search-panel">
+                                            <button type="button" class="btn btn-outline-primary" data-toggle="dropdown">
+                                                <span id="search_concept">Sort  </span><i class="fas fa-sort"></i>
+                                            </button>
+                                            <div class="dropdown-menu" role="menu">
+                                                @Html.ActionLink("Title", "Index", "House", new { sort = ViewBag.SortByTitle, SearchString = ViewBag.search }, new { @class = "dropdown-item" })
+                                                @Html.ActionLink("Province", "Index", "House", new { sort = ViewBag.SortByProvince, SearchString = ViewBag.search }, new { @class = "dropdown-item" })
+                                                @Html.ActionLink("Lowest Price", "Index", "House", new { sort = ViewBag.SortByPriceLow, SearchString = ViewBag.search }, new { @class = "dropdown-item" })
+                                                @Html.ActionLink("Highest Price", "Index", "House", new { sort = ViewBag.SortByPriceHigh, SearchString = ViewBag.search }, new { @class = "dropdown-item" })
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+
+                        </div>
+                    </div>
+                    <!--<div class="row">
+            <div class="col-lg-12">
+                <div id="advance" class="collapse" style="background-color:white;">
+                    <div class="form-group row">
+                        for (int i = 0; i < Model.Amenities.Count(); i++)
+                        {
+                            <div class="checkbox col-lg-4 col-md-4">
+                                <label>
+                                    Html.HiddenFor(m => m.Amenities[i].ID)
+                                    Html.CheckBoxFor(m => m.Amenities[i].Checked)
+                                    Html.DisplayFor(m => m.Amenities[i].Name)
+                                    Html.HiddenFor(m => m.Amenities[i].Name)
+                                </label>
+                            </div>
+                        }
+                    </div>
+                </div>
+            </div>
+        </div>-->
+                }
+            </div>
+        </div>
+        <br />
+        <div class="row">
+            <div class="col-lg-12 col-md-12">
+                <div class="content">
+                    <div class="products" style="padding: 10px;">
+                        <div class="row no-gutters">
+                            @foreach (var house in Model.Homes)
+                            {
+                                <div class="col-12 col-md-6 col-lg-4">
+                                    <a href="@Url.Action("HouseDetails","House", new {id = house.ID })" style="text-decoration:none;">
+                                        <div class="clean-product-item">
+                                            <div class="image">
+                                                <img class="img-fluid d-block mx-auto" src="~/images/placeholder.png" />
+                                            </div>
+                                            <div class="product-name">
+                                                @house.Title
+                                            </div>
+                                            <div class="about">
+
+                                                @house.Address
+                                                <br />
+                                                @house.City
+                                                <br />
+                                                @house.Province
+                                            </div>
+                                            <div class="rating">
+                                                <img src="~/images/star.svg" />
+                                                <img src="~/images/star.svg" />
+                                                <img src="~/images/star.svg" />
+                                                <img src="~/images/star-half-empty.svg" />
+                                                <img src="~/images/star-empty.svg" />
+                                            </div>
+                                            <hr>
+                                            <div class="price">
+                                                <h3>$@house.PricePerNight CAD per night</h3>
+                                                <p>Free cancellation</p>
+                                            </div>
+                                        </div>
+                                    </a>
+                                </div>
+                            }
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+}

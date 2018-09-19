@@ -1,0 +1,42 @@
+﻿@using Microsoft.AspNet.Identity
+@using HouseProject.Extensions
+@if (Request.IsAuthenticated)
+{
+    using (Html.BeginForm("LogOff", "Account", FormMethod.Post, new { id = "logoutForm", @class = "navbar-right" }))
+    {
+        @Html.AntiForgeryToken();
+        if (User.IsInRole("Admin"))
+        {
+            <li class="nav-item dropdown" role="presentation">
+                <a href="#" class="nav-link dropdown-toggle" data-toggle="dropdown">@User.Identity.GetFirstName()<b class="caret"></b></a>
+                <ul class="dropdown-menu">
+                    <li>@Html.ActionLink("My profile", "UserProfile", "User", null, htmlAttributes: new { @class = "nav-link" })</li>
+                    <li>@Html.ActionLink("Host my home", "RequestHost", "House", null, htmlAttributes: new { @class = "nav-link" })</li>
+                    <li>@Html.ActionLink("Manage host requests", "ManageRequests", "User", null, htmlAttributes: new { @class = "nav-link" })</li>
+                    <li><a href="javascript:document.getElementById('logoutForm').submit()" class="nav-link">Log out</a></li>
+                </ul>
+            </li>
+        }   
+        else
+        {
+            <li class="nav-item dropdown" role="presentation">
+                <a href="#" class="nav-link dropdown-toggle" data-toggle="dropdown">@User.Identity.GetFirstName()<b class="caret"></b></a>
+                <ul class="dropdown-menu">
+                    <li>@Html.ActionLink("My profile", "UserProfile", "User", null, htmlAttributes: new { @class = "nav-link" })</li>
+                    <li>@Html.ActionLink("Host my home", "RequestHost", "House", null, htmlAttributes: new { @class = "nav-link" })</li>
+                    <li><a href="javascript:document.getElementById('logoutForm').submit()" class="nav-link">Log out</a></li>
+                </ul>
+            </li>
+        }
+        
+    }
+}
+else
+{
+    <li class="nav-item" role="presentation">
+        @Html.ActionLink("Register", "Register", "Account", routeValues: null, htmlAttributes: new { id = "registerLink", @class = "nav-link" })
+    </li>
+    <li class="nav-item" role="presentation">
+        @Html.ActionLink("Log in", "Login", "Account", routeValues: null, htmlAttributes: new { id = "loginLink", @class = "nav-link" })
+    </li>
+}

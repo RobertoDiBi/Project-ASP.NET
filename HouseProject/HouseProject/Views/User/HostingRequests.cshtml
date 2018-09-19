@@ -1,0 +1,71 @@
+﻿@model IEnumerable<HouseProject.Models.HostRequest>
+@{
+    ViewBag.Title = "HostingRequests";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<h2 class="jumbotron">My hosting requests</h2>
+
+<div class="container">
+    <div class="row">
+        <div class="col-sm-3">
+            <ul class="list-group">
+                <li class="list-group-item">
+                    @Html.ActionLink("Profile", "UserProfile", "User")
+                </li>
+                <li class="list-group-item">
+                    @Html.ActionLink("View transactions", "Transactions", "User")
+                </li>
+                <li class="list-group-item">
+                    @Html.ActionLink("Hosting requests", "HostingRequests", "User")
+                </li>
+                <li class="list-group-item">
+                    @Html.ActionLink("Change password", "ChangePassword", "Manage")
+                </li>
+            </ul>
+        </div>
+        <div class="col-md">
+            @if (!Model.Any())
+            {
+                <p>You have not yet requested to host your home.</p>
+                @Html.ActionLink("Want to submit a request?", "RequestHosting", "House")
+            }
+            else
+            {
+                foreach (var request in Model)
+                {
+                    <table class="table table-bordered table-hover">
+                        <tr>
+                            <td>
+                                <ul class="list-group-flush">
+                                    <li class="list-group-item">
+                                        <b>@request.Home.Title</b><br />
+                                        @request.Home.Address, @request.Home.City, @request.Home.Province, @request.Home.PostalCode<br />
+                                        @request.Home.HomeType.Name | @request.Home.NumOfRooms Rooms | @request.Home.MaxOccupants max occupants | @string.Format("{0:C}", request.Home.PricePerNight) / Night<br />
+                                        Amenities:
+                                        @if (!request.Home.Amenities.Any())
+                                        {
+                                            <span>None.</span>
+                                        }
+                                        else
+                                        {
+                                            foreach (var amenity in request.Home.Amenities)
+                                            {
+                                                <span>@amenity.Name | </span>
+                                            }
+                                        }
+                                        <br />
+                                        Time of request: @request.RequestDate
+                                    </li>
+                                    <li class="list-group-item">
+                                        Status request: @request.RequestStatus
+                                    </li>
+                                </ul>
+                            </td>
+                        </tr>
+                    </table>
+                }
+            }
+        </div>
+    </div>
+</div>

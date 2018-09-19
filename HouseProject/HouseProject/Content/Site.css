@@ -1,0 +1,76 @@
+﻿.field-validation-error {
+    color: red;
+}
+
+.input-validation-error {
+    border: 2px solid red;
+}
+
+/*
+Footer Style
+*/
+#myFooter {
+    background-color: #000;
+}
+
+#myFooter .social-networks {
+    text-align: center;
+    padding-top: 30px;
+    padding-bottom: 16px;
+}
+
+#myFooter .social-networks a {
+    font-size: 45px;
+    color: #f9f9f9;
+    padding: 10px;
+    transition: 0.2s;
+}
+
+#myFooter .social-networks a:hover {
+    text-decoration: none;
+}
+
+#myFooter .facebook:hover {
+    color: #0077e2;
+}
+
+#myFooter .google:hover {
+    color: #ef1a1a;
+}
+
+#myFooter .twitter:hover {
+    color: #00aced;
+}
+
+#myFooter .instagram:hover {
+    color: #bc2a8d;
+}
+
+#myFooter .snapchat:hover {
+    color: #fffc00;
+}
+
+#myFooter li {
+    list-style: none;
+}
+
+
+#househeader {
+    background-image: url('../images/rome-background.jpg');
+    background-position: 0px -300px;
+    background-repeat:no-repeat;
+}
+
+.homesLogo {
+    width: 180px;
+    height: 90px;
+    background-image: url('../images/Vacation-Homes-Logo.png');
+    background-size: contain;
+    background-repeat: no-repeat;
+    text-indent: -9999px;
+    display:block;
+}
+.navbar{
+    padding:5px;
+}
+

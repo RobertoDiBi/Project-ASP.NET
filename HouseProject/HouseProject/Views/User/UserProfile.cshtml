@@ -1,0 +1,37 @@
+﻿
+@{
+    ViewBag.Title = "UserProfile";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<h2 class="jumbotron">My profile</h2>
+<p class="text-success">@ViewBag.StatusMessage</p>
+<div class="container">
+    <div class="row">
+        <div class="col-sm-3">
+            <ul class="list-group">
+                <li class="list-group-item">
+                    @Html.ActionLink("Profile", "UserProfile", "User")
+                </li>
+                <li class="list-group-item">
+                    @Html.ActionLink("View transactions", "Transactions", "User")
+                </li>
+                <li class="list-group-item">
+                    @Html.ActionLink("Hosting requests", "HostingRequests", "User")
+                </li>
+                <li class="list-group-item">
+                    @Html.ActionLink("Change password", "ChangePassword", "Manage")
+                </li>
+            </ul>
+        </div>
+        <div class="col-md">
+            <ul class="list-group-flush">
+                <li class="list-group-item">Name: @User.Identity.GetFirstName() @User.Identity.GetLastName()</li>
+                <li class="list-group-item">Birthdate: @User.Identity.GetBirthdate()</li>
+                <li class="list-group-item">Email: @User.Identity.Name</li>
+            </ul>
+        </div>
+    </div>
+</div>
+
+

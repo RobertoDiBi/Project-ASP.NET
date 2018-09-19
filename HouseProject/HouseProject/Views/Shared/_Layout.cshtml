@@ -1,0 +1,26 @@
+﻿<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>@ViewBag.Title - Vacation Homes</title>
+    <link href="~/Content/bootstrap.min.css" rel="stylesheet" />
+    <link href="~/Content/Site.css" rel="stylesheet" />
+    <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.1.0/css/all.css" integrity="sha384-lKuwvrZot6UHsBSfcMvOkWwlCMgc0TaWr+30HWe3a4ltaBwTZhyTEggF5tJv8tbt" crossorigin="anonymous"/>
+</head>
+<body>
+    @Html.Partial("_NavBarPartial")
+    <div  style="margin-top:100px; padding:0px 50px 25px 50px;">
+        @RenderBody()
+        <br />
+        <br />
+        <br />
+
+    </div>
+    @Html.Partial("_FooterPartial")
+    <script src="~/Scripts/jquery.min.js"></script>
+    <script src="~/Scripts/bootstrap.min.js"></script>
+    <script src="~/Scripts/theme.js"></script>
+    @RenderSection("scripts", required: false)
+</body>
+</html>
